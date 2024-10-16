@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.core.handlers.wsgi import WSGIRequest
 from django.http import HttpResponse
 from .forms import TextFileForm
-from .utils import mix_word_letters, is_txt_file
+from .utils import mix_words_letters, is_txt_file
 
 
 def home(request: WSGIRequest) -> HttpResponse:
@@ -15,7 +15,7 @@ def home(request: WSGIRequest) -> HttpResponse:
             if is_txt_file:
                 for chunk in file.chunks():
                     text_before = chunk.decode()
-                    text_after: str = mix_word_letters(chunk.decode().split())
+                    text_after: str = mix_words_letters(chunk.decode().split())
                 context = {"text_after": text_after, "text_before": text_before}
                 return render(request, "result.html", context)
             else:
