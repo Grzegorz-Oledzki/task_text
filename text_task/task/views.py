@@ -12,7 +12,7 @@ def home(request: WSGIRequest) -> HttpResponse:
         form = TextFileForm(request.POST, request.FILES)
         if form.is_valid():
             file = request.FILES["file"]
-            if is_txt_file:
+            if is_txt_file(file):
                 for chunk in file.chunks():
                     text_before = chunk.decode()
                     text_after: str = mix_words_letters(chunk.decode().split())
