@@ -1,4 +1,10 @@
 import random
+from django.core.files.uploadedfile import InMemoryUploadedFile
+
+
+def is_txt_file(file: InMemoryUploadedFile) -> bool:
+    if file.content_type == "text/plain":
+        True
 
 
 def mix_word_letters(splitted_words: list[str]) -> str:
