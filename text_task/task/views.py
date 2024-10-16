@@ -15,8 +15,8 @@ def home(request: WSGIRequest) -> HttpResponse:
             if is_txt_file:
                 for chunk in file.chunks():
                     text_before = chunk.decode()
-                    text: str = mix_word_letters(chunk.decode().split())
-                context = {"text": text, "text_before": text_before}
+                    text_after: str = mix_word_letters(chunk.decode().split())
+                context = {"text_after": text_after, "text_before": text_before}
                 return render(request, "result.html", context)
             else:
                 return HttpResponse(f"Wrong format, file should have .txt format")
