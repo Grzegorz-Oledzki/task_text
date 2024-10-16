@@ -7,7 +7,7 @@ def is_txt_file(file: InMemoryUploadedFile) -> bool:
         True
 
 
-def mix_word_letters(splitted_words: list[str]) -> str:
+def mix_words_letters(splitted_words: list[str]) -> str:
     words = []
     for word in splitted_words:
         if len(word) > 3:
