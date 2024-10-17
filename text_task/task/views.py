@@ -14,8 +14,8 @@ def home(request: WSGIRequest) -> HttpResponse:
             file = request.FILES["file"]
             if is_txt_file(file):
                 for chunk in file.chunks():
-                    text_before = chunk.decode()
-                    text_after: str = mix_words_letters(chunk.decode().split())
+                    text_before = str(chunk)
+                    text_after: str = mix_words_letters(str(chunk).split())
                 context = {"text_after": text_after, "text_before": text_before}
                 return render(request, "result.html", context)
             else:
