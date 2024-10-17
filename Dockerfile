@@ -10,4 +10,3 @@ COPY ./requirements.txt .
 RUN pip install -r requirements.txt
 # Copy the application code
 COPY . .
-CMD ["python", "./text_task/manage.py", "runserver", "0.0.0.0:8000"]
