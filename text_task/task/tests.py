@@ -44,15 +44,14 @@ def test_long_text(text: str):
 @pytest.mark.parametrize("text", test_texts)
 def test_count_of_signs(text: str):
     split_text = text.split()
-    signs = set(list(text))
     result = mix_words_letters(split_text)
-    for sign in signs:
-        assert result.count(sign) == text.count(sign)
+    assert set([sign for sign in result]) == set([sign for sign in text])
 
 
 @pytest.mark.parametrize("text", test_texts)
 def test_len_mixed_words(text: str):
     split_text = text.split()
     result = mix_words_letters(split_text)
-    for index, word in enumerate(result.split()):
-        assert len(word) == len(split_text[index])
+    assert [len(word) for word in text.split()] == [
+        len(word) for word in result.split()
+    ]
