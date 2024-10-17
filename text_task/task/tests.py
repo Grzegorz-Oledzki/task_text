@@ -45,7 +45,11 @@ def test_long_text(text: str):
 def test_count_of_signs(text: str):
     split_text = text.split()
     result = mix_words_letters(split_text)
-    assert set([sign for sign in result]) == set([sign for sign in text])
+    signs_in_result = set([sign for sign in result])
+    signs_in_text = set([sign for sign in text])
+    assert [result.count(sign) for sign in signs_in_result] == [
+        result.count(sign) for sign in signs_in_text
+    ]
 
 
 @pytest.mark.parametrize("text", test_texts)
