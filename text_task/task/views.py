@@ -1,8 +1,8 @@
-from django.shortcuts import render, redirect
 from django.core.handlers.wsgi import WSGIRequest
 from django.http import HttpResponse
-from .forms import TextFileForm
-from .utils import mix_words_letters, is_txt_file
+from django.shortcuts import render
+from task.forms import TextFileForm
+from task.services.letters_shuffler import is_txt_file, mix_words_letters
 
 
 def home(request: WSGIRequest) -> HttpResponse:
@@ -14,8 +14,13 @@ def home(request: WSGIRequest) -> HttpResponse:
             file = request.FILES["file"]
             if is_txt_file(file):
                 for chunk in file.chunks():
-                    text_before = str(chunk)
-                    text_after: str = mix_words_letters(str(chunk).split())
+                    try:
+                        text_before = chunk.decode()
+                    except UnicodeDecodeError:
+                        return HttpResponse(
+                            f"Unable to decode this file, try with normal text"
+                        )
+                    text_after: str = mix_words_letters(text_before.split())
                 context = {"text_after": text_after, "text_before": text_before}
                 return render(request, "result.html", context)
             else:
